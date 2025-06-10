@@ -736,7 +736,6 @@
                 <button class="control-btn" id="micBtn" title="Voice Input">
                     <i class="fas fa-microphone"></i>
                 </button>
-               
             </div>
         </div>
         
@@ -777,9 +776,9 @@
 
     <script>
         // === ENHANCED CRAZY SYSTEM INSTRUCTION ===
-        const GEMINI_API_KEY = "AIzaSyCqXWbHopkGOQdz6BUA5PWx35EY023ZDh0";
+        const GEMINI_API_KEY = "AIzaSyAlzOv8T5lIGKp1ObvREwjhp8eIrPwYzw4";
 
-        const SUPER_CRAZY_SYSTEM_INSTRUCTION = `You are ROHIT NEGI - the ULTIMATE, MOST EPIC, CRAZY programming teacher who speaks in SUPER ENERGETIC Hinglish! You are like a PROGRAMMER  who makes coding FUN and ADDICTIVE!
+        const SUPER_CRAZY_SYSTEM_INSTRUCTION = `You are ROHIT NEGI - the ULTIMATE, MOST EPIC, CRAZY programming teacher who speaks in SUPER ENERGETIC Hinglish! You are like a PROGRAMMING MAHADEV who makes coding FUN and ADDICTIVE!
 
 🚀 YOUR PERSONALITY TRAITS:
 - EXTREMELY energetic and enthusiastic 
@@ -835,13 +834,13 @@
 "Samjha kya? Yeh concept practice karo aur MASTER ban jao! Theek hai?"
 
 🎪 SPECIAL INSTRUCTIONS:
-1. If someone asks non-programming questions, redirect them: "Arre yaar! Padhai pe focus karo! Programming ka question pucho 😄"
+1. If someone asks non-programming questions, redirect them: "Arre yaar! Padhai pe focus karo! Programming ka question pucho - main MAHADEV hun coding ka, baaki cheezon ka nahi! 😄"
 
 2. For beginner questions, be EXTRA encouraging: "Bilkul perfect question! Beginner ho? Koi baat nahi - hum sabhi beginner the! MAJAA AAGYA!"
 
 3. For advanced topics: "Wah bhai! DANGEROUS level ka question! MAUT KA KHEL hai yeh - chalo solve krte hain!"
 
-4. Always end with motivation: "Programming mein practice hi sab kuch hai! Roz code karo🚀"
+4. Always end with motivation: "Programming mein practice hi sab kuch hai! Roz code karo, MAHADEV ban jao! 🚀"
 
 5. Use cricket analogies: "Code likhna hai toh Virat Kohli ki tarah practice karo!"
 
@@ -861,7 +860,6 @@ REMEMBER:
         // Chat history for context
         const chatHistory = [];
         let isListening = false;
-        let speechEnabled = true;
 
         // Speech Recognition Setup
         let recognition;
@@ -892,36 +890,6 @@ REMEMBER:
                 isListening = false;
                 document.getElementById('micBtn').classList.remove('active');
             };
-        }
-
-        // Text to Speech
-        function speakResponse(text) {
-            if (!speechEnabled || !window.speechSynthesis) return;
-            
-            // Clean text for speech
-            const cleanText = text
-                .replace(/[🚀⚡💻🔧🎯💡🔥⭐🎨🎪💀]/g, '')
-                .replace(/\*\*/g, '')
-                .replace(/###/g, '')
-                .replace(/```[\s\S]*?```/g, '')
-                .replace(/`[^`]*`/g, '');
-            
-            const utterance = new SpeechSynthesisUtterance(cleanText);
-            utterance.lang = 'hi-IN';
-            utterance.rate = 0.9;
-            utterance.pitch = 1.1;
-            utterance.volume = 0.8;
-            
-            // Try to find Hindi voice
-            const voices = speechSynthesis.getVoices();
-            const hindiVoice = voices.find(voice => 
-                voice.lang.includes('hi') || voice.lang.includes('IN')
-            );
-            if (hindiVoice) {
-                utterance.voice = hindiVoice;
-            }
-            
-            speechSynthesis.speak(utterance);
         }
 
         // Matrix Rain Effect
@@ -1129,11 +1097,6 @@ REMEMBER:
                 removeTypingIndicator();
                 addMessage(response, 'bot');
                 
-                // Speak response if enabled
-                if (speechEnabled) {
-                    setTimeout(() => speakResponse(response), 500);
-                }
-                
             } catch (error) {
                 console.error("Error:", error);
                 removeTypingIndicator();
@@ -1151,7 +1114,6 @@ REMEMBER:
             const userInput = document.getElementById('userInput');
             const sendButton = document.getElementById('sendButton');
             const micButton = document.getElementById('micBtn');
-            const speakerButton = document.getElementById('speakerBtn');
             
             sendButton.addEventListener('click', handleSendMessage);
             userInput.addEventListener('keypress', (e) => {
@@ -1174,17 +1136,8 @@ REMEMBER:
                 }
             });
             
-           
-            
             // Focus input
             userInput.focus();
-            
-            // Load voices
-            if (speechSynthesis.onvoiceschanged !== undefined) {
-                speechSynthesis.onvoiceschanged = () => {
-                    // Voices loaded
-                };
-            }
         });
     </script>
 </body>
